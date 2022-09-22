@@ -1,15 +1,15 @@
 import { Request, Response } from "express";
-import { Client } from "../../../entities/clients.entity";
-import { AppDataSource } from "../../data-source";
+import { AppError, handleError } from "../../errors/AppError";
+import { ListAllUsersService } from "../../services/clients/ListAllUsers.service";
 
 
-async function ListAllUsersController(request: Request, response: Response) {
-
-    const userRepository = AppDataSource.getRepository(Client);
-
-    const users = await userRepository.find();
-
-    return response.status(200).json({ users: users });
+export async function ListAllUsersController(request: Request, response: Response) {
+    try {
+        const users = await ListAllUsersService();
+        return response.status(200).json(users);
+    } catch (err) {
+        if (err instanceof AppError) {
+            handleError(err, response);
+        }
+    }
 }
-
-export { ListAllUsersController };

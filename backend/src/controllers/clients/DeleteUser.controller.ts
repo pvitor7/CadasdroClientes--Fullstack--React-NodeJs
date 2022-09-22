@@ -1,10 +1,17 @@
 import { Request, Response } from "express";
+import { AppError, handleError } from "../../errors/AppError";
 import { DeleteUserService } from "../../services/clients/DeleteUser.service";
 
 
-export const DeleteUserController =  async (request: Request, response: Response) => {
+export const DeleteUserController = async (request: Request, response: Response) => {
 
-    const user = await  DeleteUserService(request.params.id);
+    try {
+        const user = await DeleteUserService(request.params.id);
 
-    return response.status(204).json(user);
+        return response.status(204).json(user);
+    } catch (err) {
+        if (err instanceof AppError) {
+            handleError(err, response);
+        }
+    }
 }

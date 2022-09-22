@@ -8,11 +8,14 @@ export class Contact{
     id: number;
 
     @Column()
+    type?: string
+
+    @Column()
     email?: string
 
     @Column()
     phone?: string
 
-    @ManyToOne(() => Client, client => client.contacts, {nullable: true})
-    client: Client
+    @ManyToOne(() => Client, client => client.contacts, {nullable: false, eager: true})
+    client: Client;
 }

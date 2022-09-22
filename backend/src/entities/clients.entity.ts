@@ -13,6 +13,6 @@ export class Client{
     @CreateDateColumn()
     date: Date;
 
-    @OneToMany(() => Contact, (contacts) => contacts.client)
-    contacts?: Contact;
+    @OneToMany(() => Contact, contacts => contacts.client, {nullable: true})
+    contacts: Contact[];
 }

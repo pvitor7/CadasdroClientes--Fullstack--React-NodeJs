@@ -1,4 +1,4 @@
-import { Client } from "pg";
+import { Client } from "../../entities/clients.entity";
 import { AppDataSource } from "../../data-source";
 
 export const ListAllUsersService = async () => {

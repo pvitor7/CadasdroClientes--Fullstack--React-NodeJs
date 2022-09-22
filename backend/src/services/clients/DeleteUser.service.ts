@@ -1,4 +1,4 @@
-import { Client } from "../../../entities/clients.entity";
+import { Client } from "../../entities/clients.entity";
 import { AppDataSource } from "../../data-source";
 
 

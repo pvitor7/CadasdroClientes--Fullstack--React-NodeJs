@@ -1,4 +1,5 @@
-import { Client } from "../../../entities/clients.entity";
+import { Client } from "../../entities/clients.entity";
+import { Contact } from "../../entities/contact.entity";
 import { AppDataSource } from "../../data-source";
 
 export const ListUserIdService = async (id: string) => {
@@ -7,8 +8,9 @@ export const ListUserIdService = async (id: string) => {
 
     const userId = await clientsRepository.findOneBy({id: id});
 
-    return userId;
+    const contactsRepository = AppDataSource.getRepository(Contact)
+    const clientContacts = await contactsRepository.findBy({client:{id: id}})
 
-
+    return {name: userId?.name, contacts: clientContacts}
 
 }
