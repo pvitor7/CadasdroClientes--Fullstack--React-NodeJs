@@ -20,6 +20,7 @@ describe("Teste de rota de Clients", () => {
 
     const name = "Client 1"
     const clientData = { name }
+    const invalidId = "a9aa99a9-999a-99a9-999a-9aa999aaaaaa"
 
     test("Testar a criação de um novo client", async () => {
         const response = await request(app).post("/register").send(clientData);
@@ -37,8 +38,8 @@ describe("Teste de rota de Clients", () => {
         const clientData = { name }
         const response = await request(app).post("/register").send(clientData);
         expect(response.status).toBe(400);
-        expect(response.body).toHaveProperty("detail")
-        expect(response.body.detail).toBe("Insira um nome válido!")
+        expect(response.body).toHaveProperty("message")
+        expect(response.body.message).toBe("Insira um nome válido!")
     })
 
     test("Testar listagem de clients", async () => {
@@ -55,30 +56,26 @@ describe("Teste de rota de Clients", () => {
         expect(response.body).toHaveProperty("name")
         expect(response.body).toHaveProperty("contacts")
         expect(response.body.name).toBe(name)
-        expect(response.body.contacts).toHaveProperty("map");
     })
 
     test("Testar listar cliente com id inválido", async () => {
-        const invalidId = "a9aa99a9-999a-99a9-999a-9aa999aaaaaa"
         const response = await request(app).get(`/user/${invalidId}`);
-        expect(response.status).toBe(404);
-        expect(response.body).toHaveProperty("detail")
-        expect(response.body.detail).toBe("User not found")
+        expect(response.status).toBe(400);
+        expect(response.body).toHaveProperty("message")
+        expect(response.body.message).toBe("Usuário não encontrado")
     })
 
     test("Testar atualizar cliente com id inválido", async () => {
-        const invalidId = "a9aa99a9-999a-99a9-999a-9aa999aaaaaa"
         const response = await request(app).patch(`/user/${invalidId}`);
-        expect(response.status).toBe(404);
-        expect(response.body).toHaveProperty("detail")
-        expect(response.body.detail).toBe("User not found")
+        expect(response.status).toBe(400);
+        expect(response.body).toHaveProperty("message")
+        expect(response.body.message).toBe("Usuário não encontrado")
     })
 
     test("Testar exclusão de cliente com id inválido", async () => {
-        const invalidId = "a9aa99a9-999a-99a9-999a-9aa999aaaaaa"
         const response = await request(app).delete(`/user/${invalidId}`);
-        expect(response.status).toBe(404);
-        expect(response.body).toHaveProperty("detail")
-        expect(response.body.detail).toBe("User not found")
+        expect(response.status).toBe(400);
+        expect(response.body).toHaveProperty("message")
+        expect(response.body.message).toBe("Usuário não encontrado")
     })
 });

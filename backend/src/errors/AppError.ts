@@ -16,8 +16,8 @@ export const handleError = (err: AppError, res: Response) => {
     const { statusCode, message } = err;
 
     return res.status(statusCode).json({
-        status: "error",
-        statusCode,
+        // status: "error",
+        // statusCode,
         message
     })
 }
