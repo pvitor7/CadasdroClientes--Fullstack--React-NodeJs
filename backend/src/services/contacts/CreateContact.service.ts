@@ -16,7 +16,7 @@ export const ContactCreateService = async (id: any, type: string, email: string,
     const ContactRepository = AppDataSource.getRepository(Contact);
 
     const emailAlreadyExists = await ContactRepository.findOneBy({ client: { id: id }, email: email });
-    if (emailAlreadyExists) { throw new AppError("Email already register", 409) }
+    if (emailAlreadyExists) { throw new AppError("Email already register", 409)}
 
     const phoneAlreadyExists = await ContactRepository.findOneBy({ client: { id: id }, phone: phone });
     if (phoneAlreadyExists) { throw new AppError("Phone already register", 409) }
