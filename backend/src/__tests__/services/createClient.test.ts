@@ -24,9 +24,8 @@ describe("Testando service criação de client", () => {
         const name = "Client 1"
         const client1Data = {name}
         const newClient = await CreateUserService(client1Data);
-
-        expect(newClient).toEqual(
-        expect.objectContaining({name})
+        
+        expect(newClient).toEqual(expect.objectContaining({name})
         );
     })
 })
