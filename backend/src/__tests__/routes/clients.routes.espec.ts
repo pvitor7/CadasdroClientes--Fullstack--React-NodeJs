@@ -56,7 +56,6 @@ describe("Teste de rota de Clients", () => {
         expect(response.body).toHaveProperty("name")
         expect(response.body).toHaveProperty("contacts")
         expect(response.body.name).toBe(name)
-        expect(response.body.contacts).toHaveProperty("map");
     })
 
     test("Testar listar cliente com id inválido", async () => {

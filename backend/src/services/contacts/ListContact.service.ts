@@ -5,7 +5,6 @@ const ListContactsClient = async (idUser: any) => {
 
     const ContactRepository = AppDataSource.getRepository(Contact);
     const teste = await ContactRepository.find()
-    console.log("etste aqui", teste)
     const contacts =  await ContactRepository.find({where: {client: {id: idUser}}})
     const { name } = contacts[0].client
     return {Name: name, contacts};

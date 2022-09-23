@@ -13,7 +13,6 @@ export const ListUserIdService = async (id: string) => {
 
     const contactsRepository = AppDataSource.getRepository(Contact)
     const clientContacts = await contactsRepository.findOneBy({client:{id: id}})
-    console.log(userId)
 
     return {name: userId?.name, contacts: clientContacts}
 

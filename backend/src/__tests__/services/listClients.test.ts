@@ -6,7 +6,6 @@ import { ListAllUsersService } from "../../services/clients/ListAllUsers.service
 describe("Testando listagem de clientes", () => {
 
     let connection: DataSource
-
     beforeAll(async() => {
         await AppDataSource.initialize().then((res) => {
             connection = res

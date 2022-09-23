@@ -16,7 +16,6 @@ const UpdateContactService = async (idUser: string, idContact: any, dataContact:
     await ContactRepository.update(idContact, {...dataContact});
     const contactUpdate = await ContactRepository.findOneBy({id: idContact});
 
-    console.log(contactUpdate);
     return contactUpdate;
 }
 
