@@ -5,5 +5,5 @@ import { AppDataSource } from "./data-source";
 
     await AppDataSource.initialize().catch((error) => {
     console.error("Failed to initialize AppDataSource", error) });
-    app.listen(3000, () => { console.log("Servidor rodando") });
+    app.listen(3001, () => { console.log("Servidor rodando") });
 })();

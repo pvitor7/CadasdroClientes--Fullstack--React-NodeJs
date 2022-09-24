@@ -2,6 +2,7 @@ import { DataSource } from "typeorm";
 import dotenv from "dotenv";
 import { Client } from "./entities/clients.entity";
 import { Contact } from "./entities/contact.entity";
+import { Employee } from "./entities/employee.entity";
 
 dotenv.config()
 
@@ -22,7 +23,7 @@ export const AppDataSource = new DataSource(
         port: Number(process.env.DB_PORT),
         logging: true,
         synchronize: false,
-        entities: [Client, Contact],
+        entities: [Client, Contact, Employee],
         migrations: ['src/migrations/*.ts']
     });
 
