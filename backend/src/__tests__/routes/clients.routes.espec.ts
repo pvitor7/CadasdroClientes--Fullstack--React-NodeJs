@@ -2,6 +2,7 @@ import request from "supertest";
 import { DataSource } from "typeorm";
 import app from "../../app";
 import { AppDataSource } from "../../data-source";
+import { CreateUserService } from "../../services/clients/CreateUser.service";
 
 describe("Teste de rota de Clients", () => {
     let connection: DataSource
@@ -12,13 +13,17 @@ describe("Teste de rota de Clients", () => {
         }).catch((err) => {
             console.error("Erro durante a inicialização do banco de dados", err)
         });
+        await CreateUserService({ name: "Client 1" });
+        await CreateUserService({ name: "Client 2" });
+        await CreateUserService({name: "Client 3"});
+        await CreateUserService({ name: "Client 4" });
     })
 
     afterAll(async () => {
         await connection.destroy();
     })
 
-    const name = "Client 1"
+    const name = "Client teste"
     const clientData = { name }
     const invalidId = "a9aa99a9-999a-99a9-999a-9aa999aaaaaa"
 
@@ -28,9 +33,7 @@ describe("Teste de rota de Clients", () => {
         expect(response.body).toHaveProperty("id")
         expect(response.body).toHaveProperty("name")
         expect(response.body).toHaveProperty("date")
-        expect(response.body).toHaveProperty("contacts")
         expect(response.body.name).toBe(name)
-        expect(response.body.contacts).toHaveProperty("map");
     })
 
     test("Testar a criação de um novo client com com nome inválido", async () => {
@@ -55,7 +58,7 @@ describe("Teste de rota de Clients", () => {
         expect(response.status).toBe(200);
         expect(response.body).toHaveProperty("name")
         expect(response.body).toHaveProperty("contacts")
-        expect(response.body.name).toBe(name)
+        expect(response.body.name).toBe("Client 1")
     })
 
     test("Testar listar cliente com id inválido", async () => {

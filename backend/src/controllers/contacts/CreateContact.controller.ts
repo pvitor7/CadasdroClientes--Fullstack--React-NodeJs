@@ -5,7 +5,6 @@ import { ContactCreateService } from "../../services/contacts/CreateContact.serv
 export const ContactCreateController = async (request: Request, response: Response) => {
 
     try {
-
         const { type, email, phone } = request.body;
         const newContact = await ContactCreateService(request.params.id, type, email, phone)
         return response.status(201).json(newContact);
