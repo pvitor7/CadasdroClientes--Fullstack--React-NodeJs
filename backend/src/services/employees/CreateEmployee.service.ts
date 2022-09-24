@@ -11,12 +11,12 @@ export const CreateEmployeeService = async (employee: any) => {
     const hashPassword = await hash(employee.password, 12)
 
     const userRepository = AppDataSource.getRepository(Employee)
-    const newEmployee = {
-    username: employee.username,
-    password: hashPassword,
-    is_active: true,
-    date: new Date()
-    }
+
+    const newEmployee = new Employee()
+    newEmployee.username = employee.username
+    newEmployee.password = hashPassword
+    newEmployee.is_active = employee.is_active || true
+    newEmployee.date = new Date()
 
     await userRepository.create(newEmployee)
     const employeeCreated = await userRepository.save(newEmployee)

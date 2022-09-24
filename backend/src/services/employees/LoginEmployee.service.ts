@@ -17,7 +17,8 @@ export const LoginEmployeeService = async (email: string, password: string) => {
 
     const token = jwt.sign({
         id: employeeLogged.id,
-        email: employeeLogged.username
+        username: employeeLogged.username,
+        is_active: employeeLogged.is_active
         },"SECRET_KEY",
         {
             expiresIn: "12h"

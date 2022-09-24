@@ -5,7 +5,7 @@ import { LoginEmployeeService } from "../../services/employees/LoginEmployee.ser
 export const LoginEmployeeController = async (req: Request, response: Response) =>{
     try {
         const loginEmployee = await LoginEmployeeService(req.body.email, req.body.password);
-        return response.status(200).json(loginEmployee)
+        return response.status(200).json({token: loginEmployee})
     } catch (err) {
         if (err instanceof AppError) {
             handleError(err, response);
