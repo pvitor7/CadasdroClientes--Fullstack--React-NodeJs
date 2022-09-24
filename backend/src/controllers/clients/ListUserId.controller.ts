@@ -1,7 +1,6 @@
 import { Request, Response } from "express"
 import { AppError, handleError } from "../../errors/AppError";
 import { ListUserIdService } from "../../services/clients/ListUserId.service";
-import { instanceToPlain } from "class-transformer"
 
 export const ListUserIdController = async (request: Request, response: Response) => {
     try {

@@ -21,7 +21,7 @@ describe("Teste de criação Contatos", () => {
         await CreateUserService({name: "Client teste 3"});
         await CreateUserService({ name: "Client teste 4" });
     })
-
+    
     afterAll(async () => {
         await connection.destroy();
     })
@@ -29,6 +29,13 @@ describe("Teste de criação Contatos", () => {
     const contact1Data = {"type": "Pessoal", "email": "pessoal@mail.com", "phone": "21999908501"}
     const contact2Data = {"type": "Trabalho", "email": "trabalho@mail.com", "phone": "21999908551"}
     const invalidId = "a9aa99a9-999a-99a9-999a-9aa999aaaaaa"
+
+    test("Testar criar contatos para cliente com id inválido", async () => {
+        const response = await request(app).post(`/user/${invalidId}/contact`).send(contact1Data);
+        expect(response.status).toBe(400);
+        expect(response.body).toHaveProperty("message")
+        expect(response.body.message).toBe("Usuário não encontrado")
+    })
 
     test("Testar a criação de dois contatos para um usuário", async () => {
         const ListAllClients = await ListAllUsersService();
@@ -54,34 +61,27 @@ describe("Teste de criação Contatos", () => {
         expect(response.body.message).toBe("Insira pelo menos um telefone ou email")
     })
 
-    // test("Testar a criação de dois emails iguais para um usuário", async () => {
-    //     const ListAllClients = await ListAllUsersService();
-    //     const newClientId = ListAllClients[0].id;
-    //     await request(app).post(`/user/${newClientId}/contact`).send(contact1Data);
-    //     const response = await request(app).post(`/user/${newClientId}/contact`).send(contact1Data.email);
-    //     expect(response.status).toBe(409);
-    //     expect(response.body).toHaveProperty("message")
-    //     expect(response.body.message).toBe("O email do usuário já foi cadastrado")
-    // })
-
-
-    // test("Testar a criação de dois telefones iguais para um usuário", async () => {
-    //     const ListAllClients = await ListAllUsersService();
-    //     const newClientId = ListAllClients[0].id;
-    //     await request(app).post(`/user/${newClientId}/contact`).send(contact1Data);
-    //     const response = await request(app).post(`/user/${newClientId}/contact`).send({phone: contact1Data.phone});
-    //     expect(response.status).toBe(409);
-    //     expect(response.body).toHaveProperty("message")
-    //     expect(response.body.message).toBe("O telefone do usuário já foi cadastrado")
-    // })
-
-
-    test("Testar criar contatos para cliente com id inválido", async () => {
-        const response = await request(app).post(`/user/${invalidId}/contact`).send(contact1Data);
-        expect(response.status).toBe(400);
+    test("Testar a criação de dois telefones iguais para um usuário", async () => {
+        const ListAllClients = await ListAllUsersService();
+        const newClientId = ListAllClients[0].id;
+        await request(app).post(`/user/${newClientId}/contact`).send(contact1Data);
+        const response = await request(app).post(`/user/${newClientId}/contact`).send({phone: contact1Data.phone});
+        expect(response.status).toBe(409);
         expect(response.body).toHaveProperty("message")
-        expect(response.body.message).toBe("Usuário não encontrado")
+        expect(response.body.message).toBe("O telefone do usuário já foi cadastrado")
     })
+
+
+    test("Testar a criação de dois emails iguais para um usuário", async () => {
+        const ListAllClients = await ListAllUsersService();
+        const newClientId = ListAllClients[0].id;
+        await request(app).post(`/user/${newClientId}/contact`).send(contact1Data);
+        const response = await request(app).post(`/user/${newClientId}/contact`).send({email: contact1Data.email});
+        expect(response.status).toBe(409);
+        expect(response.body).toHaveProperty("message")
+        expect(response.body.message).toBe("O email do usuário já foi cadastrado")
+    })
+
 });
 
 
