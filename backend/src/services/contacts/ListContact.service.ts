@@ -1,13 +1,13 @@
 import { Contact } from "../../entities/contact.entity";
 import { AppDataSource } from "../../data-source"
 
-const ListContactsClient = async (idUser: any) => {
+const ListContactsClient = async (idUser: string) => {
 
     const ContactRepository = AppDataSource.getRepository(Contact);
-    const teste = await ContactRepository.find()
     const contacts =  await ContactRepository.find({where: {client: {id: idUser}}})
-    const { name } = contacts[0].client
-    return {Name: name, contacts};
+    let name = contacts[0].client
+
+    return {name: name, contacts};
 }
 
 export default ListContactsClient;
