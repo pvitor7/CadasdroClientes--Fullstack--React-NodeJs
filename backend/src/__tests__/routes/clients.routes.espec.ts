@@ -27,7 +27,7 @@ describe("Teste de rota de Clients", () => {
     const clientData = { name }
     const invalidId = "a9aa99a9-999a-99a9-999a-9aa999aaaaaa"
 
-    test("Testar a criação de um novo client", async () => {
+    test("Testar a criação de um novo cliente", async () => {
         const response = await request(app).post("/register").send(clientData);
         expect(response.status).toBe(201);
         expect(response.body).toHaveProperty("id")
