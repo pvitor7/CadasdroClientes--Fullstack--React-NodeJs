@@ -6,6 +6,6 @@ export const ListEmployeeIdService = async (id: string) => {
 
     const employeesRepository = AppDataSource.getRepository(Employee);
     const employeeId = await employeesRepository.findOneBy({id: id});
-    if(!employeeId){throw new AppError("Funcionárioo não encontrado", 400)}
+    if(!employeeId){throw new AppError("Funcionário não encontrado", 400)}
     return employeeId;
 }

@@ -8,10 +8,9 @@ export const LoginEmployeeService = async (email: string, password: string) => {
 
     const EmployeeRepository = AppDataSource.getRepository(Employee);
     const employeeLogged = await EmployeeRepository.findOneBy({username: email})
-
     if(!employeeLogged){ throw new AppError("Email ou senha inválidos", 401)}
 
-    const passwordCompare = bcrypt.compareSync(password, employeeLogged.password)
+    const passwordCompare = await bcrypt.compareSync(password, employeeLogged.password)
 
     if(!passwordCompare){ throw new AppError("Email ou senha inválidos", 401)}
 
