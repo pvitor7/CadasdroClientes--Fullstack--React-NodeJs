@@ -10,7 +10,7 @@ export const UpdateUserService = async (id: any, data: any) => {
     const user = await ClientRepository.findOneBy({id: id });
     if(!user){throw new AppError("Usuário não encontrado", 400)}
 
-    await ClientRepository.update(id, {...data});
+    const userUpdate = await ClientRepository.update(id, {...data});
 
-    return user;
+    return userUpdate;
 }
