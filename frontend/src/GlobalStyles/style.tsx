@@ -5,7 +5,7 @@ export const HeaderStyle = styled.header`
     width: 100vw;
     min-height: 80px;
     background: #000000;
-    
+
     h1{
         color: #FFFFFF;
     }
@@ -49,7 +49,7 @@ export const InputStyle = styled.input`
     padding: 10px;
     min-height: 30px;
     border: none;
-    margin-bottom: 20px;
+    margin: 5px;
 `
 export const ButtonStyle = styled.button`
 
@@ -64,7 +64,7 @@ export const ButtonStyle = styled.button`
     border: none;
 `
 
-export const UlStyle = styled.li`
+export const UlStyle = styled.ul`
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -92,16 +92,101 @@ export const UlStyle = styled.li`
 export const LiStyle = styled.li`
     display: flex;
     width: 90%;
-    justify-content: space-around;
     align-items: center;
     border-radius: 10px;
     background-color: #1f1c1c;
     color: #FFFFFF;
+    padding: 0 10px;
     margin: 10px;
 
-    span{
-    color: yellow
+    p{
+        width: 80%;
     }
 
+    button{
+        background-color:  #FFFFFF;
+        border: none;
+        width: 10%;
+        color: #000000;
+        font-size: 15px;
+        margin: 5px;
+    }
+
+`
+
+export const ModalStyle = styled.form`
+
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 400px;
+    width: 80%;
+    min-height: 200px;
+    padding: 3%;
+    margin: 30px;
+    background-color: #1f1c1c;
+    gap: 20px;
+
+    h2, p{
+        color: #FFFFFF
+    }
+
+    .div-buttons{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    height: auto;
+    gap: 3%;
+    }
+`
+
+export const ButtonContactStyle = styled.button`
+
+    border-radius: 10px;
+    background-color: blue;
+    color: #FFFFFF;
+    width: 70%;
+    max-width: 300px;
+    font-size: 20px;
+    min-height: 60px;
+    margin: 10px 0px;
+    padding: 10px;
+    border: none;
+`
+
+export const SelectStyle = styled.select`
+
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    max-width: 400px;
+    width: 80%;
+    padding: 10px;
+    min-height: 30px;
+    border: none;
+    margin: 20px;
+`
+
+export const TableStyle = styled.table`
+
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    width: 100%;
+    border: none;
+    padding: 20px 0px ;
+    max-width: 900px;
+
+    td{
+    width: 100px;
+    border-bottom: 1px solid  blue;
+    }
+
+    button{
+        background-color: #FFFFFF;
+        border: none;
+        width: max-content;
+    }
 `
 
