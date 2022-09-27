@@ -1,12 +1,17 @@
 import axios from "axios";
-import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { ButtonStyle, LiStyle, UlStyle } from "../../GlobalStyles/style";
 
 const ListEmployee = () => {
 
     const [listUsers, setListUsers] = useState([])
     const navigate = useNavigate();
+    const [id, setId] = useState('');
+
+    const jsonToken: any = localStorage.getItem("UserToken")
+    const token = JSON.parse(jsonToken);
+
 
     const NavigateHome = () => {
         navigate('/')
@@ -16,12 +21,28 @@ const ListEmployee = () => {
         navigate('/clients')
     }
 
-    axios.get("http://localhost:3001/employees")
-        .then((res) => {
-            setListUsers(res.data)
-        })
+    useEffect(() => {
+        axios.delete(`http://localhost:3001/employee/${id}`, {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        });
+        getEmployees();
+    })
 
-    if(!localStorage.getItem("UserToken")){ NavigateHome()}
+    const getEmployees = () => {
+        axios.get("http://localhost:3001/employees", {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        })
+            .then((res) => {
+                setListUsers(res.data)
+            })
+    }
+    getEmployees()
+
+    if (!localStorage.getItem("UserToken")) { NavigateHome() }
 
     return (
         <UlStyle>
@@ -32,6 +53,7 @@ const ListEmployee = () => {
                         <LiStyle key={key} id={user.id}>
                             <p>{user.username} </p>
                             <p>{user.is_active ? (<span>Ativo</span>) : (<span>Inativo</span>)} </p>
+                            <button onClick={() => setId(user.id)}>x</button>
 
                         </LiStyle>
                     )

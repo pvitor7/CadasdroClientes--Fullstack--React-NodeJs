@@ -20,7 +20,10 @@ const Login = () => {
         event.preventDefault()
         const login = {username: username, password: password}
         axios.post("http://localhost:3001/employee/login", login)
-        .then((res) => { localStorage.setItem("UserToken", JSON.stringify(res.data.token))
+        .then((res) => {
+
+        localStorage.setItem("UserToken", JSON.stringify(res.data.token)
+        )
         })
     }
 

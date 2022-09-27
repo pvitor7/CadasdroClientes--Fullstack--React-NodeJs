@@ -8,11 +8,18 @@ const RegisterEmployee = () => {
 
     const navigate = useNavigate();
     const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const jsonToken: any = localStorage.getItem("UserToken")
 
     const handleSubmit = async (e: any) => {
         e.preventDefault()
-        axios.post("http://localhost:3001/register", { name, email })
+        const token = await JSON.parse(jsonToken);
+        axios.post("http://localhost:3001/employee/register", {username: name, password:password }, {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        })
     }
 
     const NavigateHome = () => {
@@ -28,10 +35,10 @@ const RegisterEmployee = () => {
             <InputStyle type="text" placeholder="Seu nome" onChange={(e) => setName(e.target.value)} />
 
             <p>Senha:</p>
-            <InputStyle type="text" placeholder="Seu email" onChange={(e) => setEmail(e.target.value)} />
+            <InputStyle type="text" placeholder="Seu email" onChange={(e) => setPassword(e.target.value)} />
 
             <div className={"div-buttons"}>
-                <ButtonStyle type="submit">Cadastrar</ButtonStyle>
+                <ButtonStyle type="submit" onClick={(e) => handleSubmit(e)}>Cadastrar</ButtonStyle>
                 <ButtonStyle type="submit" onClick={() => NavigateHome()}>Voltar</ButtonStyle>
             </div>
 
