@@ -13,12 +13,12 @@ const RegisterClient = () => {
     const [phone, setPhone] = useState('');
     const [date, setDate] = useState('');
     const navigate = useNavigate();
-    
+
     const NavigateHome = () => {
         navigate('/')
         localStorage.clear()
     }
-    
+
     const handleSubmit = async (e: any) => {
         e.preventDefault()
         axios.post("http://localhost:3001/register", {name, email, phone, date})
