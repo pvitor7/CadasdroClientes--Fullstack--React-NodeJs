@@ -7,7 +7,8 @@ export const CreateUserService = async (client: any) => {
 
     if(client.name == '' || client.name == null){ throw new AppError("Insira um nome válido!", 400)}
     const userRepository = AppDataSource.getRepository(Client)
-    const newUser = {name: client.name, contacts: []}
+
+    const newUser = {name: client.name, date: client.date || new Date(), contacts: []}
 
     await userRepository.create(newUser)
     const userCreated = await userRepository.save(newUser)

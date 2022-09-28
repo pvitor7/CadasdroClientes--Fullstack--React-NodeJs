@@ -4,15 +4,16 @@ import { AppError } from "../../errors/AppError";
 import jwt from "jsonwebtoken";
 import * as bcrypt from "bcrypt";
 
-export const LoginEmployeeService = async (email: string, password: string) => {
+export const LoginEmployeeService = async (username: string, password: string) => {
 
     const EmployeeRepository = AppDataSource.getRepository(Employee);
-    const employeeLogged = await EmployeeRepository.findOneBy({username: email})
-    if(!employeeLogged){ throw new AppError("Email ou senha inválidos", 401)}
+    const Allemployee = await EmployeeRepository.find()
 
-    const passwordCompare = await bcrypt.compareSync(password, employeeLogged.password)
+    const employeeLogged: any = Allemployee.find((employee) => employee.username === username)
+    if(!employeeLogged){ throw new AppError("Username ou senha inválidos", 401)}
 
-    if(!passwordCompare){ throw new AppError("Email ou senha inválidos", 401)}
+    const passwordCompare = bcrypt.compareSync(password, employeeLogged.password)
+    if(!passwordCompare){ throw new AppError("Username ou senha inválidos", 401)}
 
     const token = jwt.sign({
         id: employeeLogged.id,
@@ -22,6 +23,5 @@ export const LoginEmployeeService = async (email: string, password: string) => {
         {
             expiresIn: "12h"
         })
-
     return token;
 }
