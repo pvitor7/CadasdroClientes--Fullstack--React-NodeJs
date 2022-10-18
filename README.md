@@ -1,4 +1,7 @@
 # Catasdro-de-Clientes
+
+Autentique-se e faça o cadastro dos seus clientes com os respectivos contatos.
+
 Projeto desenvolvido com Typescript, React, e PostgreSQL
 
 
