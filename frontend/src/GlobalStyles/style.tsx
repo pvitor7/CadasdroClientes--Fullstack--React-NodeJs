@@ -87,6 +87,19 @@ export const UlStyle = styled.ul`
     height: auto;
     gap: 10px;
     }
+    
+    .add-register{
+        background-color:  #1c1c1c;
+        border: none;
+        width: 50px;
+        font-size: 20px;
+        color: #FFFFFF;
+        border-radius: 5px;
+        font-size: 15px;
+        margin: 5px;
+        padding: 10px;
+    }
+
 `
 
 export const LiStyle = styled.li`
@@ -104,12 +117,15 @@ export const LiStyle = styled.li`
     }
 
     button{
-        background-color:  #FFFFFF;
+        background-color: #FFFFFF;
         border: none;
-        width: 10%;
-        color: #000000;
-        font-size: 15px;
+        width: 50px;
+        font-size: 20px;
+        color: #1c1c1c;
+        border-radius: 5px;
+        font-size: 18px;
         margin: 5px;
+        padding: 5px;
     }
 
 `
