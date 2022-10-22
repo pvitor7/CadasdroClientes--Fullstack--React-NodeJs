@@ -50,7 +50,8 @@ const ListClients = () => {
         <>
             {modal && <CreateContact user={user} setModal={setModal} />}
             {!modal && <UlStyle>
-                <h1>Clientes:</h1>
+                <h1>Clientes  <button className="add-register" onClick={()=> navigate('/register')}>+</button></h1>
+                
                 {
 
                     listUsers.map((user: any, key) => {

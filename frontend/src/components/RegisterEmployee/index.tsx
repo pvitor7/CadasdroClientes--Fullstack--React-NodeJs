@@ -10,16 +10,17 @@ const RegisterEmployee = () => {
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
 
-    const jsonToken: any = localStorage.getItem("UserToken")
+    // const jsonToken: any = localStorage.getItem("UserToken")
 
     const handleSubmit = async (e: any) => {
         e.preventDefault()
-        const token = await JSON.parse(jsonToken);
-        axios.post("http://localhost:3001/employee/register", {username: name, password:password }, {
-            headers: {
-                "Authorization": `Bearer ${token}`
-            }
-        })
+        // const token = await JSON.parse(jsonToken);
+        axios.post("http://localhost:3001/employee/register", {username: name, password:password } //, {
+            // headers: {
+            //     "Authorization": `Bearer ${token}`
+            // }
+        // }
+        ).catch((error) => console.log(error))
     }
 
     const NavigateHome = () => {

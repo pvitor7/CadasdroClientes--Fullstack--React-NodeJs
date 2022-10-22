@@ -8,6 +8,7 @@ const Login = () => {
 
     const NavigateClients = () => {
         navigate('/clients')
+        
     }
     const NavigateRegister = () => {
         navigate('/employee/register')
@@ -24,6 +25,7 @@ const Login = () => {
 
         localStorage.setItem("UserToken", JSON.stringify(res.data.token)
         )
+        NavigateClients()
         })
     }
 
@@ -37,7 +39,7 @@ const Login = () => {
             />
             <p>Senha:</p>
             <InputStyle type="text" placeholder="Sua senha"  onChange={(e) => {setPassword(e.target.value)}}/>
-            <ButtonStyle type="submit" onClick={(e)=> {NavigateClients()
+            <ButtonStyle type="submit" onClick={(e)=> {
             handleSubmit(e)
             }}>Login</ButtonStyle>
             <ButtonStyle type="submit" onClick={()=> NavigateRegister()}>Cadastre-se</ButtonStyle>
